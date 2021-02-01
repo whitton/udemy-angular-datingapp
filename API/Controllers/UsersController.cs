@@ -2,6 +2,7 @@
 using System.Linq;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,6 +21,7 @@ namespace API.Controllers
         public DataContext Context { get; }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<AppUser>> Users()
         {
             var users = Context.Users.ToList();
@@ -27,6 +29,7 @@ namespace API.Controllers
         }       
 
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<AppUser> FetchUser(int id)
         {
             var user = Context.Users.Where(x => x.Id == id).FirstOrDefault();
