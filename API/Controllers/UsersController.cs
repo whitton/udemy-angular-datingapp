@@ -21,7 +21,7 @@ namespace API.Controllers
         public DataContext Context { get; }
 
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<AppUser>> Users()
         {
             var users = Context.Users.ToList();
